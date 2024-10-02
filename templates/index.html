@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarcasm Detection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        // JavaScript to dynamically show or hide the "Type of Text" dropdown
+        function handleModelChange() {
+            var modelDropdown = document.getElementById('model');
+            var typeDropdown = document.getElementById('textTypeDropdown');
+            
+            // Show the "Type of Text" dropdown only if logistic_l1 is selected
+            if (modelDropdown.value === 'logistic_l1') {
+                typeDropdown.style.display = 'block';
+            } else {
+                typeDropdown.style.display = 'none';
+            }
+        }
+
+        function toggleSection(sectionId) {
+            var section = document.getElementById(sectionId);
+            if (section.style.display === "none") {
+                section.style.display = "block";
+            } else {
+                section.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Sarcasm Detection App</h1>
+        <form method="POST">
+            <div class="form-group">
+                <label for="text">Enter Text:</label>
+                <textarea id="text" name="text" rows="5" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="model">Choose Model:</label>
+                <select id="model" name="model" onchange="handleModelChange()">
+                    <option value="logistic" {% if model == 'logistic' %} selected {% endif %}>Logistic Regression</option>
+                    <option value="lstm" {% if model == 'lstm' %} selected {% endif %}>LSTM</option>
+                    <option value="bert" {% if model == 'bert' %} selected {% endif %}>BERT</option>
+                    <option value="logistic_l1" {% if model == 'logistic_l1' %} selected {% endif %}>Logistic Regression L1</option>
+                </select>
+            </div>
+
+            <!-- Hidden initially, shown only when logistic_l1 is selected -->
+            <div class="form-group" id="textTypeDropdown" style="display:none;">
+                <label for="textType">Type of Text:</label>
+                <select id="textType" name="text_type">
+                    <option value="GEN">General</option>
+                    <option value="HYP">Hyperbole</option>
+                    <option value="RQ">Rhetorical Question</option>
+                </select>
+            </div>
+
+            <button type="submit">Check Sarcasm</button>
+        </form>
+        
+        {% if result %}
+        <div class="result">
+            <h3>Input Text:</h3>
+            <p>{{ text }}</p>
+            <h2>Prediction: {{ result }}</h2>
+        </div>
+
+        <!-- Collapsible Model Info Section -->
+        <div class="model-section">
+            <button type="button" onclick="toggleSection('modelInfo')">Model Info ⬇</button>
+            <div id="modelInfo" style="display:none;">
+                <ul>
+                    {% for key, value in model_info.items() %}
+                        <li><strong>{{ key }}:</strong> {{ value }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <!-- Collapsible Model Performance Section -->
+        <div class="model-section">
+            <button type="button" onclick="toggleSection('modelPerformance')">Model Performance ⬇</button>
+            <div id="modelPerformance" style="display:none;">
+                <ul>
+                    <li><strong>Accuracy:</strong> {{ model_performance.accuracy | round(2) }}</li>
+                    <li><strong>Precision:</strong> {{ model_performance.precision | round(2) }}</li>
+                    <li><strong>Recall:</strong> {{ model_performance.recall | round(2) }}</li>
+                    <li><strong>F1 Score:</strong> {{ model_performance.f1_score | round(2) }}</li>
+                    <li><strong>Confusion Matrix:</strong>
+                        <table class="confusion-matrix">
+                            <tr><td>{{ model_performance.confusion_matrix[0][0] }}</td><td>{{ model_performance.confusion_matrix[0][1] }}</td></tr>
+                            <tr><td>{{ model_performance.confusion_matrix[1][0] }}</td><td>{{ model_performance.confusion_matrix[1][1] }}</td></tr>
+                        </table>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

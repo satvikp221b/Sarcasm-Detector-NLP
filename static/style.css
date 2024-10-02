@@ -1,0 +1,130 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('Sarcasm_bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    width: 60%;
+    margin: 30px auto;
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+textarea, select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    resize: vertical;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+form button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    background-color: #007bff; /* Blue button */
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Result box */
+.result {
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.result h3, .result h2 {
+    margin: 0 0 10px;
+}
+
+.result p {
+    background-color: #fff;
+    padding: 12px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+/* Collapsible sections */
+.model-section {
+    margin-top: 20px;
+}
+
+.model-section button {
+    width: 100%;
+    text-align: left;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.model-section button:hover {
+    background-color: #e8e8e8;
+}
+
+.model-section div {
+    padding: 15px;
+    background-color: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-top: 10px;
+}
+
+.model-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.model-section li {
+    padding: 5px 0;
+}
+
+/* Confusion matrix table */
+.confusion-matrix {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.confusion-matrix td, .confusion-matrix th {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.confusion-matrix th {
+    background-color: #f4f4f4;
+}
+
