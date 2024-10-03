@@ -174,5 +174,8 @@ def index():
     
     return render_template('index.html', result=result, text=input_text, model=selected_model, model_info=model_info,model_performance=model_performance)
 
-if __name__ == '__main__':
-    app.run(debug=True,use_reloader=False)
+if __name__ == "__main__":
+    # Get the port from the environment variable or use 5000 as a default
+    port = int(os.environ.get("PORT", 5000))
+    # Bind to 0.0.0.0 to ensure it works in all environments
+    app.run(host='0.0.0.0', port=port)
